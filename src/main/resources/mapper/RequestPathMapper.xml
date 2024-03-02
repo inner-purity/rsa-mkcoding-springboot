@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rsa.mapper.RequestPathMapper">
+    <update id="updateRequestPathById">
+        update request_path
+        <set>
+            <if test="requestPath != null">request_path = #{requestPath},</if>
+            <if test="note != null">note = #{note},</if>
+            <if test="canRequest != null">can_request = #{canRequest},</if>
+            <if test="watchIt != null">watch_it = #{watchIt},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <select id="pageQuery" resultType="com.rsa.entity.RequestPath">
+        select id, request_path, note, watch_it, can_request, update_user, update_time
+        from request_path
+        <where>
+            <if test="requestPath != null">and request_path like concat('%',#{requestPath},'%')</if>
+            <if test="note != null">and note like concat('%',#{note},'%')</if>
+            <if test="watchIt != null">and watch_it = #{watchIt}</if>
+            <if test="canRequest != null">and can_request = #{canRequest}</if>
+            <if test="updateUser != null">and update_user like concat('%',#{updateUser},'%')</if>
+        </where>
+    </select>
+</mapper>

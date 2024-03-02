@@ -1,0 +1,92 @@
+spring:
+  profiles:
+    active: dev
+---
+server:
+  port: 2599
+spring:
+  application:
+    name: rsa_mk_coding
+  datasource:
+    druid:
+      driver-class-name: ${rsa_mk_coding.datasource.druid.driver-class-name}
+      url: ${rsa_mk_coding.datasource.druid.url}
+      username: ${rsa_mk_coding.datasource.druid.username}
+      password: ${rsa_mk_coding.datasource.druid.password}
+
+  qq:
+    mail:
+      # 163邮箱是smtps,qq邮箱是smtp
+      protocol: smtp
+      # 配置 SMTP 服务器地址 (或 smtp.163.com)
+      host: smtp.qq.com
+      # 发送者邮箱
+      username: innerpurity@foxmail.com
+      # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+      password: puxyafdoblxkeaib
+      # 端口号465或587或994
+      #    port: 465
+      port: 587
+      # 默认的邮件编码为UTF-8
+      default-encoding: UTF-8
+
+  mail163:
+    mail:
+      # 163邮箱是smtps,qq邮箱是smtp
+      protocol: smtps
+      # 配置 SMTP 服务器地址 (或 smtp.163.com)
+      host: smtp.163.com
+      # 发送者邮箱
+      username: innerpurity@163.com
+      # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+      password: NZSWEXFYUFWLSBKV
+      # 端口号465或587或994
+      #    port: 465
+      port: 465
+
+  mail126:
+    mail:
+      # 163邮箱是smtps,qq邮箱是smtp
+      protocol: smtps
+      # 配置 SMTP 服务器地址 (或 smtp.163.com)
+      host: smtp.126.com
+      # 发送者邮箱
+      username: innerpurity@126.com
+      # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+      password: RRXJVWMZWNNDUING
+      # 端口号465或587或994
+      #    port: 465
+      port: 465
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleting
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.rsa.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+rsa:
+  jwt:
+    secret-key: ${rsa_mk_coding.jwt.secret-key}
+    ttl: ${rsa_mk_coding.jwt.ttl}
+    token-name: ${rsa_mk_coding.jwt.token-name}
+  app-jwt:
+    ttl: ${rsa_mk_coding.app-jwt.ttl}
+  alioss:
+    endpoint: ${rsa_mk_coding.alioss.endpoint}
+    access-key-id: ${rsa_mk_coding.alioss.access-key-id}
+    access-key-secret: ${rsa_mk_coding.alioss.access-key-secret}
+    bucket-name: ${rsa_mk_coding.alioss.bucket-name}
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rsa.mapper.RsaMapper">
+
+    <insert id="insert">
+        insert into rsa_key (user_id, store_time, key_type, key_force, note, private_key, public_key, private_password)
+        VALUES (#{userId}, #{storeTime}, #{keyType}, #{keyForce}, #{note}, #{privateKey}, #{publicKey},
+                #{privatePassword})
+    </insert>
+    <select id="pageQuery" resultType="com.rsa.entity.RsaKey">
+        select * from rsa_key
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="keyType != null">and key_type = #{keyType}</if>
+            <if test="keyForce != null">and key_force = #{keyForce}</if>
+            <if test="note != null and note != '' ">and note like concat('%',#{note},'%')</if>
+        </where>
+    </select>
+</mapper>
